@@ -46,5 +46,7 @@
 
 ## Troubleshooting
 Issue #1: When you run Postman collection using newman you may see error: 
+
 File C:\Users\admin\AppData\Roaming\npm\newman.ps1 cannot be loaded because running scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlink/?LinkID=135170.
+
 Solution: Follow step 1 to 3 given on `https://www.c-sharpcorner.com/article/how-to-fix-ps1-can-not-be-loaded-because-running-scripts-is-disabled-on-this-sys/`
