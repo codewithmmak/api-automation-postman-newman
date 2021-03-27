@@ -5,6 +5,7 @@
 2. Drag and Drop your collection
 3. Select the tests
 4. Hit Run button
+![Automating OData based RESTful API using POSTMAN](./img/postman-result.png?raw=true "Automating OData based RESTful API using POSTMAN Test Results")
 
 ## How to run Postman Collection using Newman CLI tool?
 1. Open Terminal/CMD
@@ -32,12 +33,16 @@
 4. Enter command
 `newman run OData_In_6_Steps.postman_collection.json -r htmlextra --reporter-htmlextra-export .\testResults\TestResult.html`
 
+![Automating OData based RESTful API using POSTMAN](./img/htmlextra-result.png?raw=true "Automating OData based RESTful API using POSTMAN Test Results")
+
 ## How to generate CSV report using npm newman-reporter-csv with Newman?
 1. Open Terminal/CMD
 2. Install reporters `npm install -g newman-reporter-csv`
 3. Go to root path of project
 4. Enter command
 `newman run OData_In_6_Steps.postman_collection.json -r csv --reporter-csv-export .\testResults\TestResult.csv`
+
+![Automating OData based RESTful API using POSTMAN](./img/csv-result.png?raw=true "Automating OData based RESTful API using POSTMAN Test Results")
 
 ## Troubleshooting
 Issue #1: When you run Postman collection using newman you may see error: 
