@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "f5fb36c4-3c5d-4419-834a-0972c64395a9",
+		"name": "OData_In_6_Steps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Requesting resources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"russellwhyte\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/v4/TripPinServiceRW/People",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"v4",
+						"TripPinServiceRW",
+						"People"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Requesting an individual resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify UserName Key\", function() {\r",
+							"    pm.expect(jsonData).to.have.property('UserName')\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify UserName Value\", function () {\r",
+							"    pm.expect(jsonData.UserName).to.eql(\"russellwhyte\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"187 Suffolk Ln.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/v4/TripPinServiceRW/People('russellwhyte')",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"v4",
+						"TripPinServiceRW",
+						"People('russellwhyte')"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Queries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Key and Value\", function () {\r",
+							"    pm.expect(jsonData.value[0]).to.have.property('FirstName')\r",
+							"    pm.expect(jsonData.value[0].FirstName).to.eql('Scott')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/v4/TripPinServiceRW/People?$top=2 &$select=FirstName, LastName &$filter=Trips/any(d:d/Budget gt 3000)",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"v4",
+						"TripPinServiceRW",
+						"People"
+					],
+					"query": [
+						{
+							"key": "$top",
+							"value": "2 "
+						},
+						{
+							"key": "$select",
+							"value": "FirstName, LastName "
+						},
+						{
+							"key": "$filter",
+							"value": "Trips/any(d:d/Budget gt 3000)"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creating a new resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Key and Value\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"UserName\")\r",
+							"    pm.expect(jsonData.UserName).to.eql(\"lewisblack\")\r",
+							"    pm.expect(jsonData.AddressInfo[0].City).to.have.property(\"CountryRegion\")\r",
+							"    pm.expect(jsonData.AddressInfo[0].City.CountryRegion).to.eql(\"United States\")\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"UserName\":\"lewisblack\",\r\n   \"FirstName\":\"Lewis\",\r\n   \"LastName\":\"Black\",\r\n   \"Emails\":[\r\n      \"lewisblack@example.com\"\r\n   ],\r\n   \"AddressInfo\":[\r\n      {\r\n         \"Address\":\"187 Suffolk Ln.\",\r\n         \"City\":{\r\n            \"CountryRegion\":\"United States\",\r\n            \"Name\":\"Boise\",\r\n            \"Region\":\"ID\"\r\n         }\r\n      }\r\n   ],\r\n   \"Gender\":\"Male\",\r\n   \"Concurrency\":635519729375200400\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://services.odata.org/v4/(S(34wtn2c0hkuk5ekg0pjr513b))/TripPinServiceRW/People",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"v4",
+						"(S(34wtn2c0hkuk5ekg0pjr513b))",
+						"TripPinServiceRW",
+						"People"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relating resources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"@odata.id\":\"https://services.odata.org/V4/(S(34wtn2c0hkuk5ekg0pjr513b))/TripPinServiceRW/People('russellwhyte')/Trips(0)\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://services.odata.org/v4/(S(34wtn2c0hkuk5ekg0pjr513b))/TripPinServiceRW/People('lewisblack')/Trips/$ref",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"v4",
+						"(S(34wtn2c0hkuk5ekg0pjr513b))",
+						"TripPinServiceRW",
+						"People('lewisblack')",
+						"Trips",
+						"$ref"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invoking a function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(data);\r",
+							"\r",
+							"pm.test(\"Lenght of jsonData = \" + jsonData.value.length, function () {\r",
+							"    pm.expect(jsonData.value.length).to.equal((3));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://services.odata.org/v4/(S(34wtn2c0hkuk5ekg0pjr513b))/TripPinServiceRW/People('russellwhyte')/Trips(0)/Microsoft.OData.SampleService.Models.TripPin.GetInvolvedPeople()",
+					"protocol": "https",
+					"host": [
+						"services",
+						"odata",
+						"org"
+					],
+					"path": [
+						"v4",
+						"(S(34wtn2c0hkuk5ekg0pjr513b))",
+						"TripPinServiceRW",
+						"People('russellwhyte')",
+						"Trips(0)",
+						"Microsoft.OData.SampleService.Models.TripPin.GetInvolvedPeople()"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
