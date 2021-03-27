@@ -13,7 +13,10 @@
 4. Enter command
 `newman run OData_In_6_Steps.postman_collection.json`
 5. CLI will show below results
+
 ![Automating OData based RESTful API using POSTMAN](./img/cli-result-01.png?raw=true "Automating OData based RESTful API using POSTMAN Test Results")
+
+![Automating OData based RESTful API using POSTMAN](./img/cli-result-02.png?raw=true "Automating OData based RESTful API using POSTMAN Test Results")
 
 ## How to generate HTML report using npm newman-reporter-html with Newman?
 1. Open Terminal/CMD
