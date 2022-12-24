@@ -1,5 +1,5 @@
 {
-  "name": "odata-in-6-steps",
+  "name": "postman-newman-automation-odata",
   "version": "1.0.0",
   "description": "Automating OData based RESTful API using POSTMAN",
   "main": "index.js",
