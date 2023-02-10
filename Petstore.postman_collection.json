@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "5495f02a-204b-4718-b682-c67e3d37bf17",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get-FindByStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUri}}/v2/pet/findByStatus?status={{status}}",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "{{status}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post-UploadImage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/mdmoe/OneDrive/Desktop/labrador-dog.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUri}}/v2/pet/9223372036854254602/uploadImage",
+					"host": [
+						"{{baseUri}}"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"9223372036854254602",
+						"uploadImage"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "status",
+			"value": "available",
+			"type": "default"
+		}
+	]
+}
